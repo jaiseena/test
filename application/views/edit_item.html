@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Item</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        textarea,
+        input[type="file"] {
+            width: calc(100% - 12px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        img {
+            display: block;
+            margin-top: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Item</h2>
+        <?php echo validation_errors('<div style="color: red;">', '</div>'); ?>
+        <?php echo form_open_multipart('ItemController/update_item/' . $item->id); ?>
+            <div>
+                <label for="itemname">Item Name:</label>
+                <input type="text" id="itemname" name="itemname" value="<?php echo $item->item_name; ?>" required>
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required><?php echo $item->description; ?></textarea>
+            </div>
+            <div>
+                <label for="image">Upload New Image:</label>
+                <input type="file" id="image" name="userfile">
+                <img src="<?php echo base_url($item->image); ?>" alt="Item Image">
+            </div><br><br>
+            <div>
+                <button type="submit">Update</button>
+            </div>
+        <?php echo form_close(); ?>
+    </div>
+</body>
+</html>
